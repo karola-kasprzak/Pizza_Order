@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="main">
+    <h1 class="main-header">Pizzeria za Rogiem</h1>
+    <h2 class="main-subHeader">Złoż swoje zamówienie</h2>
+    <div class="main-form">
+      <p class="form-p">Dane zamawiającego</p>
+      <label for="name">Imię i Nazwisko</label>
+      <input type="text" name="name">
+      <label for="phone">Numer telefonu</label>
+      <input type="text" name="phone">
+      <p class="form-p">Adres dostawy</p>
+      <label for="adress-street">Ulica</label>
+      <input type="text" name="addres-street">
+      <label for="adress-house">Numer domu / mieszkania</label>
+      <input type="text" name="addres-house">
+      <label for="adress-code">Kod pocztowy</label>
+      <input type="text" name="addres-code">
+      <label for="adress-city">Miejscowość</label>
+      <input type="text" name="addres-city">
+      <p class="form-p">Twoje zamówienie</p>
+      <label for="pizza">Wybierz rodzaj pizzy</label>
+      <select name="pizza" id="pizza">
+        <option value="0">-- Wybierz pizzę --</option>
+        <option value="margherita">Margherita</option>
+        <option value="capriciosa">Capriciosa</option>
+        <option value="prosciutto">Prosciutto</option>
+        <option value="salami">Salami</option>
+        <option value="frutti di mare">Frutti Di Mare</option>
+      </select>
+     
+      <p>Wybierz sosy</p>
+      <input type="checkbox" name="top-tomato" id="top-tomato" value="tomato sauce">
+      <label for="top-tomato">sos pomidorowy</label>
+      <input type="checkbox" name="top-garlic" id="top-garlic" value="garlic sauce">
+      <label for="top-garlic">sos czosnkowy</label>
+      <p class="form-price">Cena:</p>
+
+      <input type="checkbox" name="consent" id="consent" value="1">
+      <label for="consent">Wyrażam zgodę na przetwarzanie moich danych dla celów realizacji zamówienia.</label>
+      <button id="submit">Złóż zamówienie</button>
+    </div>
+  </div>
+  
+  <script src="main.js"></script>
+</body>
+</html>
