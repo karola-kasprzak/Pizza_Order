@@ -4,31 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-  <div class="main">
-    <h1 class="main-header">Pizzeria za Rogiem</h1>
-    <h2 class="main-subHeader">Złoż swoje zamówienie</h2>
-    <div class="main-form">
-      <p class="form-p">Dane zamawiającego</p>
-      <label for="name">Imię i Nazwisko</label>
-      <input type="text" name="name">
+  <div class="main container">
+    <div class="jumbotron opacity-3 py-2 mt-5">
+      <h1 class="display-2 text-center m-5 ">Pizzeria za Rogiem</h1>
+    </div>
+    <div class="main-form jumbotron form-group">
+      <h2 class="display-4">Złoż swoje zamówienie</h2>
+      <h5 class="mt-5 mb-3">Dane zamawiającego</h5>
+      <label for="name" class="form-text">Imię i Nazwisko</label>
+      <input type="text" name="name" class="form-control" required>
       <label for="phone">Numer telefonu</label>
-      <input type="text" name="phone">
-      <p class="form-p">Adres dostawy</p>
+      <input type="text" name="phone" class="form-control">
+      <h5 class="mt-5 mb-3">Adres dostawy</h5>
       <label for="adress-street">Ulica</label>
-      <input type="text" name="addres-street">
+      <input type="text" name="addres-street" class="form-control"v>
       <label for="adress-house">Numer domu / mieszkania</label>
-      <input type="text" name="addres-house">
+      <input type="text" name="addres-house" class="form-control">
       <label for="adress-code">Kod pocztowy</label>
-      <input type="text" name="addres-code">
+      <input type="text" name="addres-code" class="form-control">
       <label for="adress-city">Miejscowość</label>
-      <input type="text" name="addres-city">
-      <p class="form-p">Twoje zamówienie</p>
+      <input type="text" name="addres-city" class="form-control">
+      <h5 class="mt-5 mb-3">Twoje zamówienie</h5>
       <label for="pizza">Wybierz rodzaj pizzy</label>
-      <select name="pizza" id="pizza">
+      <select name="pizza" id="pizza" class="form-control">
         <option value="0">-- Wybierz pizzę --</option>
         <option value="margherita">Margherita</option>
         <option value="capriciosa">Capriciosa</option>
@@ -36,17 +39,24 @@
         <option value="salami">Salami</option>
         <option value="frutti di mare">Frutti Di Mare</option>
       </select>
-     
-      <p>Wybierz sosy</p>
-      <input type="checkbox" name="top-tomato" id="top-tomato" value="tomato sauce">
-      <label for="top-tomato">sos pomidorowy</label>
-      <input type="checkbox" name="top-garlic" id="top-garlic" value="garlic sauce">
-      <label for="top-garlic">sos czosnkowy</label>
-      <p class="form-price">Cena:</p>
 
-      <input type="checkbox" name="consent" id="consent" value="1">
-      <label for="consent">Wyrażam zgodę na przetwarzanie moich danych dla celów realizacji zamówienia.</label>
-      <button id="submit">Złóż zamówienie</button>
+      <p class="mt-3 mb-1">Wybierz sosy</p>
+      <div class="form-check my-2">
+        <input type="checkbox" name="top-tomato" id="top-tomato" value="tomato sauce" class="form-check-input">
+        <label for="top-tomato" class="form-check-label">sos pomidorowy</label>
+      </div>
+      <div class="form-check my-2">
+        <input type="checkbox" name="top-garlic" id="top-garlic" value="garlic sauce" class="form-check-input">
+        <label for="top-garlic" class="form-check-label">sos czosnkowy</label>
+      </div>
+
+      <h4 class="display-3 my-4">Do zapłaty: <span id="price">0</span> PLN</h4>
+
+      <div class="form-check my-5">
+        <input type="checkbox" name="consent" id="consent" value="1" class="form-check-input">
+        <label for="consent" class="form-check-label">Wyrażam zgodę na przetwarzanie moich danych dla celów realizacji zamówienia.</label> 
+      </div>
+      <button id="submit" class="btn btn-success btn-lg btn-block">Złóż zamówienie</button>
     </div>
   </div>
   
