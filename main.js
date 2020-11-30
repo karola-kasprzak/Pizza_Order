@@ -29,6 +29,15 @@ $(function () {
         });
     }
 
+    function validatePizzaSelect() {
+        const pizzaSelectValue = $("#pizza :selected").val();
+        if (pizzaSelectValue === "0") {
+            $("#pizza")
+                .after('<p class="text-danger small">Wybierz rodzaj pizzy</p>')
+                .attr("class", "form-control border-danger");
+        }
+    }
+
     const submitOrder = function () {
         //remove previous validation indication
         $(".text-danger").remove();
@@ -36,7 +45,7 @@ $(function () {
 
         //validation functions
         validateTextInput();
-        // validatePizzaSelect();
+        validatePizzaSelect();
         validateConsent();
     };
 
