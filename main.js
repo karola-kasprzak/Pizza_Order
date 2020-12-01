@@ -15,35 +15,45 @@ $(function () {
         return idArr;
     }
 
-    function validateConsent() {
-        const consentCheckbox = $("#consent");
-        if (!consentCheckbox.is(":checked")) {
-            $('label[for="consent"]').after(
-                '<p class="text-danger small">Zgoda jest wymagana</p>'
-            );
-        }
-    }
-
-    function validateTextInput() {
-        const textInputIDs = getAllTextInputIDs();
-        textInputIDs.forEach((item) => {
-            if ($(`#${item}`).val() === "") {
-                $(`#${item}`)
+    function displayPrompt() {
+        //remove previous validation indication
+        (function clearValidation() {
+            $(".text-danger").remove();
+            $(".border-danger").attr("class", "form-control");
+        })();
+        //prompt checking consent checkbox
+        (function checkConsent() {
+            const consentCheckbox = $("#consent");
+            if (!consentCheckbox.is(":checked")) {
+                $('label[for="consent"]').after(
+                    '<p class="text-danger small">Zgoda jest wymagana</p>'
+                );
+            }
+        })();
+        //prompt fill all input fields
+        (function checkTextInput() {
+            const textInputIDs = getAllTextInputIDs();
+            textInputIDs.forEach((item) => {
+                if ($(`#${item}`).val() === "") {
+                    $(`#${item}`)
+                        .after(
+                            '<p class="text-danger small">To pole jest wymagane</p>'
+                        )
+                        .attr("class", "form-control border-danger");
+                }
+            });
+        })();
+        //prompt pizza selection
+        (function checkPizzaSelect() {
+            const pizzaSelectValue = $("#pizza :selected").val();
+            if (pizzaSelectValue === "0") {
+                $("#pizza")
                     .after(
-                        '<p class="text-danger small">To pole jest wymagane</p>'
+                        '<p class="text-danger small">Wybierz rodzaj pizzy</p>'
                     )
                     .attr("class", "form-control border-danger");
             }
-        });
-    }
-
-    function validatePizzaSelect() {
-        const pizzaSelectValue = $("#pizza :selected").val();
-        if (pizzaSelectValue === "0") {
-            $("#pizza")
-                .after('<p class="text-danger small">Wybierz rodzaj pizzy</p>')
-                .attr("class", "form-control border-danger");
-        }
+        })();
     }
 
     //price display on pizza select
@@ -51,6 +61,7 @@ $(function () {
         $("#price").text(priceList[$("#pizza :selected").val()]);
     });
 
+    //validate if all fields are filled and logs JSON if they are
     function createOrder() {
         let orderArr = [];
         //adding values from text input fields
@@ -69,20 +80,20 @@ $(function () {
         orderArr.push($("#top-tomato").is(":checked"));
         orderArr.push($("#top-garlic").is(":checked"));
 
-        // console.log(orderArr);
         // checking for empty strings and if consent checkbox is checked --- and creating order object if none found
         const foundEmpty = orderArr.findIndex((item) => item === "");
         const consentGiven = $("#consent").is(":checked");
 
         if (foundEmpty > -1 || !consentGiven) {
-            return console.log("such error");
+            return false;
         } else {
             const order = new Order(orderArr);
-
-            return console.log(order);
+            console.log(order);
+            return true;
         }
     }
 
+    //constructor function for order JSON
     function Order(arr) {
         this.name = arr[0];
         this.phone = arr[1];
@@ -95,21 +106,32 @@ $(function () {
         this.garlic_sauce = arr[8];
     }
 
-    function displayConfirm() {}
+    //display a modal on submit success
+    function displayConfirm() {
+        $("#myModal").modal();
+    }
+
+    //clear form on submit success
+    function clearForm() {
+        $("input").each(function () {
+            $(this).val("");
+        });
+        $("select").val("0");
+        $("input:checkbox").each(function () {
+            $(this).prop("checked", false);
+        });
+        $("#price").text("0");
+    }
 
     const submitOrder = function () {
-        $("#myModal").modal();
-        //remove previous validation indication
-        $(".text-danger").remove();
-        $(".border-danger").attr("class", "form-control");
+        //visual cues for user to fill all required fields
+        displayPrompt();
 
-        //validation functions
-        validateTextInput();
-        validatePizzaSelect();
-        validateConsent();
-
-        //create JSON
-        createOrder();
+        //verify order and display success
+        if (createOrder()) {
+            displayConfirm();
+            clearForm();
+        }
     };
 
     $("#submit").on("click", submitOrder);
